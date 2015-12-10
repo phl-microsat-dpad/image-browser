@@ -1,0 +1,28 @@
+language: node_js
+node_js:
+- '0.12'
+
+env:
+  global:
+  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+
+before_script:
+- npm install -g bower grunt-cli
+- bower install
+- gem install sass --version "=3.4.9"
+- gem install compass --version "=1.0.1"
+
+script: grunt build
+
+deploy:
+  provider: s3
+  access_key_id: AKIAJR4CUXWRKZDB6RAA
+  secret_access_key:
+    secure: cYYpx+LVDFLQqMGDuUNODU6kqEFsr4C58wSah4gmHjnK5FrZIcNF6E7A4qEu/yVI3sch6+hZBT4ckprQF0rGQd4EB2graXjmd47hALjSF3srXlOmg2BpOYai/yC08Bj48mzjwQGEW2rBhWSu3aFDgzCuq/K9CMuGXep1AaUWGTM=
+  bucket: libra.developmentseed.org
+  local-dir: dist
+  skip_cleanup: true
+  acl: public_read
+  on:
+    repo: AstroDigital/libra
+    branch: master
