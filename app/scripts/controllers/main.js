@@ -16,7 +16,7 @@ angular.module('dauriaSearchApp')
     // Configure URLs
     var meta_api = 'https://phl-microsat.cloudapp.net/meta-api/';
     var storage_api = 'https://phl-microsat.dream.upd.edu.ph/storage-api/';
-    var download_endpoint = 'https://phl-microsat-storage.dream.upd.edu.ph/images/';
+    var download_endpoint = 'https://phl-microsat-storage.dream.upd.edu.ph/images/bundles';
     var tile_layer = 'http://phlosmtiles.cloudapp.net/tiles/{z}/{x}/{y}.png';
 
     var canceller = $q.defer();
@@ -705,7 +705,7 @@ angular.module('dauriaSearchApp')
     */
     $scope.getDownloadSize = function(result) {
       if (!result.downloadSize) {
-        var requestURL = download_endpoint + result.sceneID;
+        var requestURL = storage_api + result.sceneID;
         console.log(requestURL);
         $http.get(requestURL)
         .success( function(data){
