@@ -13,9 +13,15 @@ angular.module('dauriaSearchApp')
     // array of everything returned from api calls
     $scope.results = [];
 
-    // api endpoint and canceller
-    var endpoint = 'http://phl-microsat.cloudapp.net/meta-api';
+    // Configure URLs
+    var meta_api = 'https://phl-microsat.cloudapp.net/meta-api/';
+    var storage_api = 'https://phl-microsat.dream.upd.edu.ph/storage-api/';
+    var download_endpoint = 'https://phl-microsat-storage.dream.upd.edu.ph/images/';
+    var tile_layer = 'http://phlosmtiles.cloudapp.net/tiles/{z}/{x}/{y}.png';
+
     var canceller = $q.defer();
+
+
 
     // Cloud coverage.
     $scope.cloudCoverageMin = 0;
@@ -81,7 +87,7 @@ angular.module('dauriaSearchApp')
     ]);
 
     $scope.defaults = {
-      tileLayer: 'http://phlosmtiles.cloudapp.net/tiles/{z}/{x}/{y}.png',
+      tileLayer: tile_layer,
       maxZoom: 14
     };
 
@@ -213,7 +219,7 @@ angular.module('dauriaSearchApp')
           $scope.spinner.stop();
 
       } else {
-        $http.get(endpoint + '/landsat?search=' + $scope.searchString, { timeout: canceller.promise })
+        $http.get(meta_api + 'landsat?search=' + $scope.searchString, { timeout: canceller.promise })
           .success(function(data) {
           setInfoPane(); // Hide info pane so it doesn't flash when results are redrawn
 
@@ -243,7 +249,7 @@ angular.module('dauriaSearchApp')
               scene.icon = {};
               scene.icon.type = 'div';
               scene.icon.className = 'map-icon text-center';
-              scene.downloadURL = 'http://localhost/images/bundles/' + scene.sceneID + '.tar.bz';
+              scene.downloadURL = download_endpoint + scene.sceneID + '.tar.bz';
               scene.downloadSize = false;
               $scope.results.push(scene);
             }
@@ -699,7 +705,7 @@ angular.module('dauriaSearchApp')
     */
     $scope.getDownloadSize = function(result) {
       if (!result.downloadSize) {
-        var requestURL = 'http://phl-microsat.cloudapp.net/storage-api/scenes/' + result.sceneID;
+        var requestURL = download_endpoint + result.sceneID;
         console.log(requestURL);
         $http.get(requestURL)
         .success( function(data){
