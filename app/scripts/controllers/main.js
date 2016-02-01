@@ -15,7 +15,7 @@ angular.module('dauriaSearchApp')
 
     // Configure URLs
     var meta_api = 'https://phl-microsat.cloudapp.net/meta-api/';
-    var storage_api = 'https://phl-microsat.dream.upd.edu.ph/storage-api/scenes/';
+    var storage_api = 'https://phl-microsat-storage.dream.upd.edu.ph/storage-api/scenes/';
     var download_endpoint = 'https://phl-microsat-storage.dream.upd.edu.ph/images/bundles/';
     var tile_layer = 'http://phlosmtiles.cloudapp.net/tiles/{z}/{x}/{y}.png';
 
