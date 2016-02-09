@@ -123,8 +123,8 @@ angular.module('dauriaSearchApp')
 
     // For keeping some stuff clean until after the first zoom
     $scope.firstZoomDone = false;
-    var MAX_LONG = 127.6;
-    var MIN_LONG = 116;
+    var MAX_LONG = 128;
+    var MIN_LONG = 115;
 
     // Initially set map location to the Philippines
     var demoCenter = 
@@ -184,9 +184,9 @@ angular.module('dauriaSearchApp')
       var swLat = mod($scope.bounds.southWest.lat + 180, 360) - 180;
       var swLong = mod($scope.bounds.southWest.lng + 180, 360) - 180;
       
-      var MAX_LAT = 19.2;
-      var MIN_LAT = 3.8;
-      var MAX_LONG = 127.6;
+      var MAX_LAT = 22;
+      var MIN_LAT = 3.6;
+      var MAX_LONG = 128;
       var MIN_LONG = 116;
 
       if(swLong < MIN_LONG){ swLong = MIN_LONG; }
